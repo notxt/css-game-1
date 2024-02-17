@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>CSS Game 1</title>
+
+    <style>
+      :root {
+        --color-background: hsl(0 0% 10%);
+        --color-font: hsl(0 0% 85%);
+        --color-debug: magenta;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+      }
+
+      body {
+        background-color: var(--color-background);
+        color: var(--color-font);
+        font-family: monospace;
+      }
+
+      .main-container {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        width: 50vw;
+        max-width: 700px;
+      }
+
+      #map {
+        column-gap: 20px;
+        display: flex;
+        display: none;
+        flex-direction: row;
+      }
+
+      section {
+        display: flex;
+        flex-direction: column;
+        row-gap: 28px;
+      }
+
+      section > p {
+        font-size: calc(1rem * (18 / 16));
+        font-weight: bold;
+        line-height: calc(1rem * (26 / 16));
+      }
+
+      section > div {
+        display: flex;
+        flex-direction: column;
+        row-gap: 5px;
+      }
+
+      label {
+        cursor: pointer;
+        font-style: italic;
+        padding: 10px;
+      }
+
+      section {
+        display: none;
+        opacity: 0;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      :has(#bedroom:checked) ~ #bedroom_scene {
+        animation: fadeIn 5s;
+        animation-fill-mode: forwards;
+        display: flex;
+      }
+
+      :has(#hallway:checked) ~ #hallway_scene {
+        animation: fadeIn 5s;
+        animation-fill-mode: forwards;
+        display: flex;
+      }
+
+      :has(#study:checked) ~ #study_scene {
+        animation: fadeIn 5s;
+        animation-fill-mode: forwards;
+        display: flex;
+      }
+
+      :has(#kitchen:checked) ~ #kitchen_scene {
+        animation: fadeIn 5s;
+        animation-fill-mode: forwards;
+        display: flex;
+      }
+
+      :has(#entry:checked) ~ #entry_scene {
+        animation: fadeIn 5s;
+        animation-fill-mode: forwards;
+        display: flex;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="state"></div>
+    <div class="main-container">
+      <main>
+        <div id="map">
+          <table id="first_floor">
+            <caption>
+              first_floor
+            </caption>
+            <tbody>
+              <tr>
+                <td></td>
+                <td><input type="radio" name="room" id="bedroom" checked /></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><input type="radio" name="room" id="study" /></td>
+                <td><input type="radio" name="room" id="hallway" /></td>
+                <td><input type="radio" name="room" id="kitchen" /></td>
+              </tr>
+              <tr>
+                <td><input type="radio" name="room" id="dinning" /></td>
+                <td><input type="radio" name="room" id="entry" /></td>
+                <td><input type="radio" name="room" id="garage" /></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><input type="radio" name="room" id="outside" /></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table id="upstairs">
+            <caption>
+              upstairs
+            </caption>
+            <tbody>
+              <tr>
+                <td><input type="radio" name="room" id="master_bedroom" /></td>
+                <td><input type="radio" name="room" id="master_closet" /></td>
+                <td><input type="radio" name="room" id="master_bathroom" /></td>
+              </tr>
+              <tr>
+                <td><input type="radio" name="room" id="upstairs_halway" /></td>
+                <td>
+                  <input type="radio" name="room" id="upstairs_bathroom" />
+                </td>
+                <td>
+                  <input type="radio" name="room" id="upstairs_bedroom" />
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table id="basement">
+            <caption>
+              basement
+            </caption>
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><input type="radio" name="room" id="basement_stairs" /></td>
+                <td><input type="radio" name="room" id="laundry" /></td>
+                <td><input type="radio" name="room" id="wine_cellar" /></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <section id="bedroom_scene">
+          <p>You wake up in an unfamiliar bed</p>
+          <p>Heavy blankets push you into the sunken mattress</p>
+          <p>
+            A green lamp casts a weak light across a room filled with hundreds
+            of dolls staring at you
+          </p>
+          <p>Across from you is a closed door</p>
+
+          <div>
+            <label for="hallway">Try opening the door</label>
+          </div>
+        </section>
+
+        <section id="hallway_scene">
+          <p>You find yourself in a long hallway</p>
+          <p>Tall paintings of skeletal figures line the walls</p>
+          <p>
+            On one side you see a cracked door. On the other you see a closed
+            door with a bright light behind it.
+          </p>
+          <p>
+            The hallway continues on growing brighter and seeming to grow in
+            size as you walk down it.
+          </p>
+
+          <div>
+            <label for="bedroom">Retreat to the bedroom</label>
+            <label for="study">Nudge open the cracked door</label>
+            <label for="kitchen"
+              >Try the closed door bright light behind it</label
+            >
+            <label for="entry">Continue down the hallway</label>
+          </div>
+        </section>
+
+        <section id="study_scene">
+          <p>You find yourself in a dimly lit room with towering bookshelves</p>
+          <p>
+            An enormous mahogany desk looms in the middle of the walled castle.
+            On the desk, smoke drifts weakly from the smoldering butt of a
+            crumpled cigar
+          </p>
+          <div>
+            <label for="hallway">Return to the hallway</label>
+          </div>
+        </section>
+
+        <section id="kitchen_scene">
+          <p>Blinding white tile covers every surface</p>
+          <p>
+            On the counter a wooden cutting board contain piles of herbs and a
+            carved ham hock leaking blood. A half-buried cleaver justs from the
+            butchery.
+          </p>
+          <p>
+            In the corner a small door pushed by an unseen breeze creaks open
+          </p>
+          <p>
+            At the end of the room a rich smell wafts from an open doorframe
+          </p>
+          <div>
+            <label for="hallway">Back to the hallway</label>
+            <label for="basement_stairs">Try the creaky door</label>
+            <label for="dinning">Move toward the rich smells</label>
+          </div>
+        </section>
+
+        <section id="entry_scene">
+          <p>The entry</p>
+          <div>
+            <label for="stairs">Climb the winding stair case</label>
+            <label for="halway">Retreat down the hallway</label>
+            <label for="dinning">Creep around the corner</label>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
