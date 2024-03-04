@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-    <title>CSS Game 1</title>
+    <title>The House</title>
 
     <style>
       :root {
@@ -24,10 +24,24 @@
         background-color: var(--color-background);
         color: var(--color-font);
         font-family: monospace;
+        display: flex;
+        flex-direction: column;
+        row-gap: 100px;
+      }
+
+      #debug_container {
+        display: flex;
+      }
+
+      #debug_view {
+        display: none;
+      }
+
+      :has(#debug:checked) ~ #debug_view {
+        display: block;
       }
 
       .main-container {
-        height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -45,7 +59,6 @@
       #map {
         column-gap: 20px;
         display: flex;
-        display: none;
         flex-direction: row;
       }
 
@@ -78,6 +91,17 @@
         opacity: 0;
       }
 
+      * :has(#lamp:checked) ~ * .lamp_hide {
+        display: none;
+      }
+
+      .lamp_show {
+        display: none;
+      }
+      * :has(#lamp:checked) ~ * .lamp_show {
+        display: block;
+      }
+
       @keyframes fadeIn {
         from {
           opacity: 0;
@@ -87,31 +111,31 @@
         }
       }
 
-      :has(#bedroom:checked) ~ #bedroom_scene {
+      * :has(#bedroom:checked) ~ * #bedroom_scene {
         animation: fadeIn 5s;
         animation-fill-mode: forwards;
         display: flex;
       }
 
-      :has(#hallway:checked) ~ #hallway_scene {
+      * :has(#hallway:checked) ~ * #hallway_scene {
         animation: fadeIn 5s;
         animation-fill-mode: forwards;
         display: flex;
       }
 
-      :has(#study:checked) ~ #study_scene {
+      * :has(#study:checked) ~ * #study_scene {
         animation: fadeIn 5s;
         animation-fill-mode: forwards;
         display: flex;
       }
 
-      :has(#kitchen:checked) ~ #kitchen_scene {
+      * :has(#kitchen:checked) ~ * #kitchen_scene {
         animation: fadeIn 5s;
         animation-fill-mode: forwards;
         display: flex;
       }
 
-      :has(#entry:checked) ~ #entry_scene {
+      * :has(#entry:checked) ~ * #entry_scene {
         animation: fadeIn 5s;
         animation-fill-mode: forwards;
         display: flex;
@@ -120,9 +144,11 @@
   </head>
 
   <body>
-    <div id="state"></div>
-    <div class="main-container">
-      <main>
+    <div id="debug_container">
+      <div>
+        <input type="checkbox" id="debug" /><label for="debug">Debug</label>
+      </div>
+      <div id="debug_view">
         <div id="map">
           <table id="first_floor">
             <caption>
@@ -202,7 +228,16 @@
             </tbody>
           </table>
         </div>
+        <div id="inventory">
+          <h2>Inventory</h2>
+          <input type="checkbox" id="lamp" /> lamp
+          <input type="checkbox" id="cleaver" /> cleaver
+        </div>
+      </div>
+    </div>
 
+    <div class="main-container">
+      <main>
         <section id="bedroom_scene">
           <p>You wake up in an unfamiliar bed</p>
           <p>Heavy blankets push you into the sunken mattress</p>
@@ -214,6 +249,7 @@
 
           <div>
             <label for="hallway">Try opening the door</label>
+            <label for="lamp" class="lamp_hide">Pick up lamp</label>
           </div>
         </section>
 
@@ -280,6 +316,11 @@
           </div>
         </section>
       </main>
+    </div>
+
+    <div>
+      <h2>Inventory</h2>
+      <p class="lamp_show">Lamp with a green glow</p>
     </div>
   </body>
 </html>
